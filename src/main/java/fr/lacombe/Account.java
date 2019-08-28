@@ -22,7 +22,11 @@ public class Account {
     public void print() {
         String statement = STATEMENT_TITLE;
         if (null != this.amountDeposit)
-            statement += "\n10/01/2012 || 1000.00 || || 1000.00";
+            statement += "\n10/01/2012 || " + getFormatAmount(this.amountDeposit.getMoney()) + " || || " + getFormatAmount(this.amountDeposit.getMoney());
         printer.print(statement);
+    }
+
+    private String getFormatAmount(double money) {
+        return String.format("%.2f", money).replace(',', '.');
     }
 }

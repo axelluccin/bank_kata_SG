@@ -30,11 +30,10 @@ public class AccountTest {
 
         PrinterFake printed = new PrinterFake();
         Account account = new Account(printed);
-        account.deposit(new Amount(1000.00));
+        account.deposit(new Amount(2000.00));
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
-                        "13/01/2012 || 2000.00 || || 3000.00\n" +
-                        "10/01/2012 || 1000.00 || || 1000.00");
+                "10/01/2012 || 2000.00 || || 2000.00");
     }
 }
