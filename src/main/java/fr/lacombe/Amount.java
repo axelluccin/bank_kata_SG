@@ -7,7 +7,7 @@ public class Amount {
         this.money = money;
     }
 
-    public double getMoney() {
-        return money;
+    String getFormatAmount() {
+        return String.format("%.2f", money).replace(',', '.');
     }
 }

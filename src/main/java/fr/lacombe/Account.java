@@ -22,11 +22,8 @@ public class Account {
     public void print() {
         String statement = STATEMENT_TITLE;
         if (null != this.amountDeposit)
-            statement += "\n10/01/2012 || " + getFormatAmount(this.amountDeposit.getMoney()) + " || || " + getFormatAmount(this.amountDeposit.getMoney());
+            statement += "\n10/01/2012 || " + this.amountDeposit.getFormatAmount() + " || || " + this.amountDeposit.getFormatAmount();
         printer.print(statement);
     }
 
-    private String getFormatAmount(double money) {
-        return String.format("%.2f", money).replace(',', '.');
-    }
 }
