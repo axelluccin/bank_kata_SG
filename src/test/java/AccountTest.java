@@ -26,7 +26,7 @@ public class AccountTest {
     }
 
     @Test
-    public void name() {
+    public void deposit_2000_on_account_print_title_and_one_line() {
 
         PrinterFake printed = new PrinterFake();
         Account account = new Account(printed);
