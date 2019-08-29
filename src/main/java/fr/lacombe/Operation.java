@@ -11,7 +11,7 @@ public class Operation {
         this.amount = amount;
     }
 
-    public boolean getType(OperationType operationType) {
+    public boolean isType(OperationType operationType) {
         return operationType.equals(this.operationType);
     }
 
@@ -21,7 +21,7 @@ public class Operation {
 
     public String formatWithdrawal() {
         String withdrawal;
-        if (getType(Deposit)) {
+        if (isType(Deposit)) {
             withdrawal = "";
         } else {
             withdrawal = formatAmount(amountMoney()) + " ";
@@ -31,7 +31,7 @@ public class Operation {
 
     public String formatDeposit() {
         String deposit;
-        if (getType(Deposit)) {
+        if (isType(Deposit)) {
             deposit = formatAmount(amountMoney()) + " ";
         } else {
             deposit = "";
@@ -44,7 +44,7 @@ public class Operation {
     }
 
     double calculate(double balance) {
-        if (getType(Deposit)) {
+        if (isType(Deposit)) {
             balance += amountMoney();
         } else {
             balance -= amountMoney();
