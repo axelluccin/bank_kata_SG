@@ -49,4 +49,16 @@ public class AccountTest {
                 "10/01/2012 || 1000.00 || || 3000.00\n" +
                 "10/01/2012 || 2000.00 || || 2000.00");
     }
+
+    @Test
+    public void withdrawal_500_on_account_print_title_and_one_line() {
+        PrinterFake printed = new PrinterFake();
+        Account account = new Account(printed);
+        account.withDrawal(new Amount(500.00));
+
+        account.print();
+        String actual = printed.getPrinted();
+        assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
+                "10/01/2012 || || 500.00 || -500.00");
+    }
 }

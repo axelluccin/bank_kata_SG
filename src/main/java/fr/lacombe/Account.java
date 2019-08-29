@@ -1,14 +1,13 @@
 package fr.lacombe;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    public static final String STATEMENT_TITLE = "date || credit || debit || balance";
+    private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
     private List<Amount> amountDeposit = new ArrayList<>();
+    private Amount amountWithDrawal;
 
     public Account(PrinterStatement printer) {
         this.printer = printer;
@@ -19,17 +18,19 @@ public class Account {
     }
 
     public void withDrawal(Amount amount) {
-        throw new NotImplementedException();
+        amountWithDrawal = amount;
     }
 
     public void print() {
-        String statement = "";
+        StringBuilder statement = new StringBuilder();
         if (amountDeposit.size() > 0) {
             double balance = 0;
             for (Amount amount : amountDeposit) {
                 balance += amount.money;
-                statement = "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance) + statement;
+                statement.insert(0, "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance));
             }
+        } else if (null != amountWithDrawal) {
+            statement.insert(0, "\n10/01/2012 || || " + formatAmount(amountWithDrawal.money) + " || -" + formatAmount(amountWithDrawal.money));
         }
         printer.print(STATEMENT_TITLE + statement);
     }
