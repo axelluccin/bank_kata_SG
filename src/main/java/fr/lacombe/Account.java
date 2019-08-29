@@ -1,15 +1,11 @@
 package fr.lacombe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static fr.lacombe.OperationType.Deposit;
+import static fr.lacombe.OperationType.Withdrawal;
 
 public class Account {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
-    private List<Amount> amountDeposit = new ArrayList<>();
-    private List<Amount> amountWithDrawal = new ArrayList<>();
     private Operations operations;
 
     public Account(PrinterStatement printer, Operations operations) {
@@ -18,17 +14,15 @@ public class Account {
     }
 
     public void deposit(Amount amount) {
-        amountDeposit.add(amount);
         operations.add(Deposit, amount);
     }
 
     public void withDrawal(Amount amount) {
-        amountWithDrawal.add(amount);
+        operations.add(Withdrawal, amount);
     }
 
     public void print() {
         StringBuilder statement = getStringBuilder();
-        FormatterOperation formatterOperation = new FormatterOperation();
 
         printer.print(STATEMENT_TITLE + statement);
     }
@@ -36,15 +30,44 @@ public class Account {
     private StringBuilder getStringBuilder() {
         StringBuilder statement = new StringBuilder();
         double balance = 0;
-        for (Amount amount : amountDeposit) {
-            balance += amount.money;
-            statement.insert(0, "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance));
-        }
-        for (Amount amount : amountWithDrawal) {
-            balance -= amount.money;
-            statement.insert(0, "\n10/01/2012 || || " + formatAmount(amount.money) + " || " + formatAmount(balance));
+        for (Operation operation : operations.getAll()) {
+            String deposit;
+            String withdrawal;
+            balance = calculate(balance, operation);
+            deposit = formatDeposit(operation);
+            withdrawal = formatWithdrawal(operation);
+            statement.insert(0, "\n10/01/2012 || " + deposit + "|| " + withdrawal + "|| " + formatAmount(balance));
         }
         return statement;
+    }
+
+    private String formatWithdrawal(Operation operation) {
+        String withdrawal;
+        if (operation.getType(Deposit)) {
+            withdrawal = "";
+        } else {
+            withdrawal = formatAmount(operation.amount.money) + " ";
+        }
+        return withdrawal;
+    }
+
+    private String formatDeposit(Operation operation) {
+        String deposit;
+        if (operation.getType(Deposit)) {
+            deposit = formatAmount(operation.amount.money) + " ";
+        } else {
+            deposit = "";
+        }
+        return deposit;
+    }
+
+    private double calculate(double balance, Operation operation) {
+        if (operation.getType(Deposit)) {
+            balance += operation.amount.money;
+        } else {
+            balance -= operation.amount.money;
+        }
+        return balance;
     }
 
     private String formatAmount(double account) {
