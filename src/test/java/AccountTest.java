@@ -1,3 +1,4 @@
+import Balance.Balance;
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
 import fr.lacombe.OperationsHistory;
@@ -12,12 +13,14 @@ public class AccountTest {
     private PrinterFake printed;
     private Account account;
     private OperationsHistory operationsHistory;
+    private Balance balance;
 
     @Before
     public void setUp() throws Exception {
         printed = new PrinterFake();
         operationsHistory = new OperationsHistory();
-        account = new Account(printed, operationsHistory);
+        balance = new Balance();
+        account = new Account(printed, operationsHistory, balance);
     }
 
     @Test
@@ -58,8 +61,6 @@ public class AccountTest {
 
     @Test
     public void withdrawal_500_on_account_print_title_and_one_line() {
-        PrinterFake printed = new PrinterFake();
-        Account account = new Account(printed, operationsHistory);
         account.withdrawal(new Amount(500.00));
 
         account.print();

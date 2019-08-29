@@ -42,13 +42,4 @@ public class Operation {
     private String formatAmount(double account) {
         return String.format("%.2f", account).replace(',', '.');
     }
-
-    double calculate(double balance) {
-        if (isType(Deposit)) {
-            balance += amountMoney();
-        } else {
-            balance -= amountMoney();
-        }
-        return balance;
-    }
 }

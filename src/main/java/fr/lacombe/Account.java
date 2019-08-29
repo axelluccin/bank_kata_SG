@@ -1,5 +1,7 @@
 package fr.lacombe;
 
+import Balance.Balance;
+
 import static fr.lacombe.OperationType.Deposit;
 import static fr.lacombe.OperationType.Withdrawal;
 
@@ -7,10 +9,12 @@ public class Account {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
     private OperationsHistory operationsHistory;
+    private final Balance balance;
 
-    public Account(PrinterStatement printer, OperationsHistory operationsHistory) {
+    public Account(PrinterStatement printer, OperationsHistory operationsHistory, Balance balance) {
         this.printer = printer;
         this.operationsHistory = operationsHistory;
+        this.balance = balance;
     }
 
     public void deposit(Amount amount) {
@@ -28,10 +32,10 @@ public class Account {
 
     private StringBuilder getStatement() {
         StringBuilder statement = new StringBuilder();
-        double balance = 0;
         for (Operation operation : operationsHistory.getAll()) {
-            balance = operation.calculate(balance);
-            statement.insert(0, "\n10/01/2012 || " + operation.formatDeposit() + "|| " + operation.formatWithdrawal() + "|| " + formatAmount(balance));
+            statement.insert(0, "\n10/01/2012 || " + operation.formatDeposit() + "|| "
+                    + operation.formatWithdrawal() + "|| "
+                    + formatAmount(this.balance.calculate(operation)));
         }
         return statement;
     }

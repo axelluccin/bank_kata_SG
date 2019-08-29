@@ -1,3 +1,4 @@
+import Balance.Balance;
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
 import fr.lacombe.OperationsHistory;
@@ -10,19 +11,19 @@ public class BankAccpetanceTest {
         // Setup
         PrinterFake printer = new PrinterFake();
         OperationsHistory operationsHistory = new OperationsHistory();
-        Account account = new Account(printer, operationsHistory);
+        Account account = new Account(printer, operationsHistory, new Balance());
         account.deposit(new Amount(1000.00));
         account.deposit(new Amount(2000.00));
         account.withdrawal(new Amount(500.00));
-        
+
         //test
         account.print();
-        
+
         // assert
         Assertions.assertThat(printer.getPrinted()).
                 isEqualTo("date || credit || debit || balance\n" +
-                "14/01/2012 || || 500.00 || 2500.00\n" +
-                "13/01/2012 || 2000.00 || || 3000.00\n" +
-                "10/01/2012 || 1000.00 || || 1000.00");
+                        "14/01/2012 || || 500.00 || 2500.00\n" +
+                        "13/01/2012 || 2000.00 || || 3000.00\n" +
+                        "10/01/2012 || 1000.00 || || 1000.00");
     }
 }
