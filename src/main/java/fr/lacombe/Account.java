@@ -24,16 +24,13 @@ public class Account {
     public void print() {
         StringBuilder statement = new StringBuilder();
         double balance = 0;
-        if (amountDeposit.size() > 0) {
-            for (Amount amount : amountDeposit) {
-                balance += amount.money;
-                statement.insert(0, "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance));
-            }
-        } else if (null != amountWithDrawal) {
-            for (Amount amount : amountWithDrawal) {
-                balance += amount.money;
-                statement.insert(0, "\n10/01/2012 || || " + formatAmount(amount.money) + " || -" + formatAmount(balance));
-            }
+        for (Amount amount : amountDeposit) {
+            balance += amount.money;
+            statement.insert(0, "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance));
+        }
+        for (Amount amount : amountWithDrawal) {
+            balance -= amount.money;
+            statement.insert(0, "\n10/01/2012 || || " + formatAmount(amount.money) + " || " + formatAmount(balance));
         }
         printer.print(STATEMENT_TITLE + statement);
     }
