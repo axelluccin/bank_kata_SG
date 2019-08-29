@@ -1,7 +1,5 @@
 package fr.lacombe;
 
-import static fr.lacombe.OperationType.Deposit;
-
 public class Operation {
     private final OperationType operationType;
     private Amount amount;
@@ -11,35 +9,16 @@ public class Operation {
         this.amount = amount;
     }
 
-    public boolean isType(OperationType operationType) {
-        return operationType.equals(this.operationType);
-    }
-
     public double amountMoney() {
-        return amount.money;
+        return operationType.amountMoney(amount.money);
     }
 
     public String formatWithdrawal() {
-        String withdrawal;
-        if (isType(Deposit)) {
-            withdrawal = "";
-        } else {
-            withdrawal = formatAmount(amountMoney()) + " ";
-        }
-        return withdrawal;
+        return operationType.formatWithdrawal(amount.money);
     }
 
     public String formatDeposit() {
-        String deposit;
-        if (isType(Deposit)) {
-            deposit = formatAmount(amountMoney()) + " ";
-        } else {
-            deposit = "";
-        }
-        return deposit;
+        return operationType.formatDeposit(amount.money);
     }
 
-    private String formatAmount(double account) {
-        return String.format("%.2f", account).replace(',', '.');
-    }
 }

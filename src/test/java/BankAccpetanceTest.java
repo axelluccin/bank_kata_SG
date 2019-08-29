@@ -1,4 +1,3 @@
-import Balance.Balance;
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
 import fr.lacombe.OperationsHistory;
@@ -11,7 +10,7 @@ public class BankAccpetanceTest {
         // Setup
         PrinterFake printer = new PrinterFake();
         OperationsHistory operationsHistory = new OperationsHistory();
-        Account account = new Account(printer, operationsHistory, new Balance());
+        Account account = new Account(printer, operationsHistory);
         account.deposit(new Amount(1000.00));
         account.deposit(new Amount(2000.00));
         account.withdrawal(new Amount(500.00));

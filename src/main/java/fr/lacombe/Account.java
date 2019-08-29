@@ -9,12 +9,10 @@ public class Account {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
     private OperationsHistory operationsHistory;
-    private final Balance balance;
 
-    public Account(PrinterStatement printer, OperationsHistory operationsHistory, Balance balance) {
+    public Account(PrinterStatement printer, OperationsHistory operationsHistory) {
         this.printer = printer;
         this.operationsHistory = operationsHistory;
-        this.balance = balance;
     }
 
     public void deposit(Amount amount) {
@@ -32,15 +30,18 @@ public class Account {
 
     private StringBuilder getStatement() {
         StringBuilder statement = new StringBuilder();
+        Balance balance = new Balance(0);
         for (Operation operation : operationsHistory.getAll()) {
-            statement.insert(0, "\n10/01/2012 || " + operation.formatDeposit() + "|| "
+            balance = balance.calculate(operation);
+            statement.insert(0, "\n10/01/2012 || "
+                    + operation.formatDeposit() + "|| "
                     + operation.formatWithdrawal() + "|| "
-                    + formatAmount(this.balance.calculate(operation)));
+                    + formatAmount(balance));
         }
         return statement;
     }
 
-    private String formatAmount(double account) {
-        return String.format("%.2f", account).replace(',', '.');
+    private String formatAmount(Balance account) {
+        return String.format("%.2f", account.balance).replace(',', '.');
     }
 }

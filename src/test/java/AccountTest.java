@@ -19,8 +19,8 @@ public class AccountTest {
     public void setUp() throws Exception {
         printed = new PrinterFake();
         operationsHistory = new OperationsHistory();
-        balance = new Balance();
-        account = new Account(printed, operationsHistory, balance);
+        balance = new Balance(0);
+        account = new Account(printed, operationsHistory);
     }
 
     @Test

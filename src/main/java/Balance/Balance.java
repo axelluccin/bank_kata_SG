@@ -2,15 +2,36 @@ package Balance;
 
 import fr.lacombe.Operation;
 
-import static fr.lacombe.OperationType.Deposit;
+import java.util.Objects;
 
 public class Balance {
-    private double balance = 0;
+    public final double balance;
 
-    public double calculate(Operation operation) {
-        if (operation.isType(Deposit)) {
-            return this.balance += operation.amountMoney();
-        }
-        return this.balance -= operation.amountMoney();
+    public Balance(double balance) {
+        this.balance = balance;
+    }
+
+    public Balance calculate(Operation operation) {
+        return new Balance(this.balance + operation.amountMoney());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Balance balance1 = (Balance) o;
+        return Double.compare(balance1.balance, balance) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(balance);
+    }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "balance=" + balance +
+                '}';
     }
 }
