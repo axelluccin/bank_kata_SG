@@ -1,5 +1,6 @@
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
+import fr.lacombe.Operations;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -8,7 +9,8 @@ public class BankAccpetanceTest {
     public void deposit_and_withdrawal_on_account_print_the_statement() {
         // Setup
         PrinterFake printer = new PrinterFake();
-        Account account = new Account(printer);
+        Operations operations = new Operations();
+        Account account = new Account(printer, operations);
         account.deposit(new Amount(1000.00));
         account.deposit(new Amount(2000.00));
         account.withDrawal(new Amount(500.00));

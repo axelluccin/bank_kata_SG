@@ -3,18 +3,23 @@ package fr.lacombe;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fr.lacombe.OperationType.Deposit;
+
 public class Account {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
     private List<Amount> amountDeposit = new ArrayList<>();
     private List<Amount> amountWithDrawal = new ArrayList<>();
+    private Operations operations;
 
-    public Account(PrinterStatement printer) {
+    public Account(PrinterStatement printer, Operations operations) {
         this.printer = printer;
+        this.operations = operations;
     }
 
     public void deposit(Amount amount) {
-        this.amountDeposit.add(amount);
+        amountDeposit.add(amount);
+        operations.add(Deposit, amount);
     }
 
     public void withDrawal(Amount amount) {
@@ -22,6 +27,13 @@ public class Account {
     }
 
     public void print() {
+        StringBuilder statement = getStringBuilder();
+        FormatterOperation formatterOperation = new FormatterOperation();
+
+        printer.print(STATEMENT_TITLE + statement);
+    }
+
+    private StringBuilder getStringBuilder() {
         StringBuilder statement = new StringBuilder();
         double balance = 0;
         for (Amount amount : amountDeposit) {
@@ -32,7 +44,7 @@ public class Account {
             balance -= amount.money;
             statement.insert(0, "\n10/01/2012 || || " + formatAmount(amount.money) + " || " + formatAmount(balance));
         }
-        printer.print(STATEMENT_TITLE + statement);
+        return statement;
     }
 
     private String formatAmount(double account) {

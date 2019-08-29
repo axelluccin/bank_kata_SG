@@ -1,6 +1,8 @@
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
+import fr.lacombe.Operations;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,11 +11,13 @@ public class AccountTest {
 
     private PrinterFake printed;
     private Account account;
+    private Operations operations;
 
     @Before
     public void setUp() throws Exception {
         printed = new PrinterFake();
-        account = new Account(printed);
+        operations = new Operations();
+        account = new Account(printed, operations);
     }
 
     @Test
@@ -55,7 +59,7 @@ public class AccountTest {
     @Test
     public void withdrawal_500_on_account_print_title_and_one_line() {
         PrinterFake printed = new PrinterFake();
-        Account account = new Account(printed);
+        Account account = new Account(printed, operations);
         account.withDrawal(new Amount(500.00));
 
         account.print();
@@ -66,8 +70,6 @@ public class AccountTest {
 
     @Test
     public void withdrawal_500_and_1000_on_account_print_title_and_two_line() {
-        PrinterFake printed = new PrinterFake();
-        Account account = new Account(printed);
         account.withDrawal(new Amount(500.00));
         account.withDrawal(new Amount(1000.00));
 
@@ -77,4 +79,19 @@ public class AccountTest {
                 "10/01/2012 || || 1000.00 || -1500.00\n" +
                 "10/01/2012 || || 500.00 || -500.00");
     }
+
+    @Ignore
+    @Test
+    public void toto() {
+        account.withDrawal(new Amount(500.00));
+        account.deposit(new Amount(1000.00));
+
+        account.print();
+        String actual = printed.getPrinted();
+        assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
+                "12/01/2012 || || 500.00 || 500.00\n" +
+                "10/01/2012 || 1000.00 || || 1000.00\n");
+    }
+
+
 }
