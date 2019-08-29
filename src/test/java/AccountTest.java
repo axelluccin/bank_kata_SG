@@ -1,6 +1,6 @@
 import fr.lacombe.Account;
 import fr.lacombe.Amount;
-import fr.lacombe.Operations;
+import fr.lacombe.OperationsHistory;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,13 +11,13 @@ public class AccountTest {
 
     private PrinterFake printed;
     private Account account;
-    private Operations operations;
+    private OperationsHistory operationsHistory;
 
     @Before
     public void setUp() throws Exception {
         printed = new PrinterFake();
-        operations = new Operations();
-        account = new Account(printed, operations);
+        operationsHistory = new OperationsHistory();
+        account = new Account(printed, operationsHistory);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class AccountTest {
     @Test
     public void withdrawal_500_on_account_print_title_and_one_line() {
         PrinterFake printed = new PrinterFake();
-        Account account = new Account(printed, operations);
-        account.withDrawal(new Amount(500.00));
+        Account account = new Account(printed, operationsHistory);
+        account.withdrawal(new Amount(500.00));
 
         account.print();
         String actual = printed.getPrinted();
@@ -70,8 +70,8 @@ public class AccountTest {
 
     @Test
     public void withdrawal_500_and_1000_on_account_print_title_and_two_line() {
-        account.withDrawal(new Amount(500.00));
-        account.withDrawal(new Amount(1000.00));
+        account.withdrawal(new Amount(500.00));
+        account.withdrawal(new Amount(1000.00));
 
         account.print();
         String actual = printed.getPrinted();
@@ -83,7 +83,7 @@ public class AccountTest {
     @Ignore
     @Test
     public void toto() {
-        account.withDrawal(new Amount(500.00));
+        account.withdrawal(new Amount(500.00));
         account.deposit(new Amount(1000.00));
 
         account.print();

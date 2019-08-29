@@ -3,7 +3,7 @@ package fr.lacombe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Operations {
+public class OperationsHistory {
     private List<Operation> historyOperation = new ArrayList<>();
 
     public void add(OperationType operationType, Amount amount) {
