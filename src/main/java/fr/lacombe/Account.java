@@ -7,7 +7,7 @@ public class Account {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
     private final PrinterStatement printer;
     private List<Amount> amountDeposit = new ArrayList<>();
-    private Amount amountWithDrawal;
+    private List<Amount> amountWithDrawal = new ArrayList<>();
 
     public Account(PrinterStatement printer) {
         this.printer = printer;
@@ -18,19 +18,22 @@ public class Account {
     }
 
     public void withDrawal(Amount amount) {
-        amountWithDrawal = amount;
+        amountWithDrawal.add(amount);
     }
 
     public void print() {
         StringBuilder statement = new StringBuilder();
+        double balance = 0;
         if (amountDeposit.size() > 0) {
-            double balance = 0;
             for (Amount amount : amountDeposit) {
                 balance += amount.money;
                 statement.insert(0, "\n10/01/2012 || " + formatAmount(amount.money) + " || || " + formatAmount(balance));
             }
         } else if (null != amountWithDrawal) {
-            statement.insert(0, "\n10/01/2012 || || " + formatAmount(amountWithDrawal.money) + " || -" + formatAmount(amountWithDrawal.money));
+            for (Amount amount : amountWithDrawal) {
+                balance += amount.money;
+                statement.insert(0, "\n10/01/2012 || || " + formatAmount(amount.money) + " || -" + formatAmount(balance));
+            }
         }
         printer.print(STATEMENT_TITLE + statement);
     }
