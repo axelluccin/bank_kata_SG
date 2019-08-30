@@ -1,4 +1,7 @@
-import fr.lacombe.*;
+import fr.lacombe.Account;
+import fr.lacombe.Amount;
+import fr.lacombe.FormatterOperation;
+import fr.lacombe.OperationsHistory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,14 +12,12 @@ public class AccountTest {
     private PrinterFake printed;
     private Account account;
     private OperationsHistory operationsHistory;
-    private Balance balance;
     FormatterOperation formatterOperation;
 
     @Before
     public void setUp() throws Exception {
         printed = new PrinterFake();
         operationsHistory = new OperationsHistory();
-        balance = new Balance(0);
         formatterOperation = new FormatterOperation();
         account = new Account(printed, operationsHistory, formatterOperation, new ClockFake());
     }
