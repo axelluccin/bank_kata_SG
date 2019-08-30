@@ -8,6 +8,5 @@ public class ClockTest {
 
         String actual = clockFake.dateTime();
         Assertions.assertThat(actual).isEqualTo("10/01/2012");
-
     }
 }

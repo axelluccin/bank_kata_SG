@@ -6,8 +6,8 @@ import java.util.List;
 public class OperationsHistory {
     private List<Operation> historyOperation = new ArrayList<>();
 
-    public void add(OperationType operationType, Amount amount) {
-        historyOperation.add(new Operation(operationType, amount));
+    public void add(OperationType operationType, Amount amount, String dateTime) {
+        historyOperation.add(new Operation(operationType, amount, dateTime));
     }
 
     public List<Operation> getAll() {

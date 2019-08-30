@@ -5,21 +5,25 @@ import static fr.lacombe.OperationType.Withdrawal;
 
 public class Account {
     private final PrinterStatement printer;
-    private OperationsHistory operationsHistory;
+    private final OperationsHistory operationsHistory;
     private final FormatterOperation formatterOperation;
+    private ClockOperation clockOperation;
 
-    public Account(PrinterStatement printer, OperationsHistory operationsHistory, FormatterOperation formatterOperation) {
+    public Account(PrinterStatement printer, OperationsHistory operationsHistory, FormatterOperation formatterOperation, ClockOperation clockOperation) {
         this.printer = printer;
         this.operationsHistory = operationsHistory;
         this.formatterOperation = formatterOperation;
+        this.clockOperation = clockOperation;
     }
 
     public void deposit(Amount amount) {
-        operationsHistory.add(Deposit, amount);
+        String dateTime = clockOperation.dateTime();
+        operationsHistory.add(Deposit, amount, dateTime);
     }
 
     public void withdrawal(Amount amount) {
-        operationsHistory.add(Withdrawal, amount);
+        String dateTime = clockOperation.dateTime();
+        operationsHistory.add(Withdrawal, amount, dateTime);
     }
 
     public void print() {

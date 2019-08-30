@@ -19,7 +19,7 @@ public class AccountTest {
         operationsHistory = new OperationsHistory();
         balance = new Balance(0);
         formatterOperation = new FormatterOperation();
-        account = new Account(printed, operationsHistory, formatterOperation);
+        account = new Account(printed, operationsHistory, formatterOperation, new ClockFake());
     }
 
     @Test

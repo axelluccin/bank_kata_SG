@@ -2,11 +2,14 @@ package fr.lacombe;
 
 public class Operation {
     private final OperationType operationType;
-    private Amount amount;
+    private final Amount amount;
 
-    public Operation(OperationType operationType, Amount amount) {
+    private final String dateTime;
+
+    public Operation(OperationType operationType, Amount amount, String dateTime) {
         this.operationType = operationType;
         this.amount = amount;
+        this.dateTime = dateTime;
     }
 
     public double amountMoney() {
