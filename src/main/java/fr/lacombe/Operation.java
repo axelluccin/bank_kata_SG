@@ -5,7 +5,7 @@ public class Operation {
     private final Amount amount;
 
     private final String dateTime;
-    public final Balance balance;
+    private final Balance balance;
 
 
     public Operation(OperationType operationType, Amount amount, String dateTime, Balance balance) {

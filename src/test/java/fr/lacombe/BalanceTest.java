@@ -1,6 +1,5 @@
-import fr.lacombe.Amount;
-import fr.lacombe.Balance;
-import fr.lacombe.Operation;
+package fr.lacombe;
+
 import org.junit.Test;
 
 import static fr.lacombe.OperationType.Deposit;

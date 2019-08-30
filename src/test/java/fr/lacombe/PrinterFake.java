@@ -1,4 +1,4 @@
-import fr.lacombe.PrinterStatement;
+package fr.lacombe;
 
 public class PrinterFake implements PrinterStatement {
 

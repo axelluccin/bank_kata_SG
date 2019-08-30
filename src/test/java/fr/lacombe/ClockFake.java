@@ -1,5 +1,6 @@
-import fr.lacombe.ClockOperation;
+package fr.lacombe;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -7,10 +8,8 @@ public class ClockFake implements ClockOperation {
 
     private final Queue<String> dateTimes;
 
-    public ClockFake() {
-        dateTimes = new LinkedList<>();
-        dateTimes.add("10/01/2012");
-        dateTimes.add("12/01/2012");
+    public ClockFake(String... dateTimes) {
+        this.dateTimes = new LinkedList<>(Arrays.asList(dateTimes));
     }
 
     @Override

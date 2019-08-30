@@ -11,6 +11,6 @@ public class OperationsHistory {
     }
 
     public List<Operation> getAll() {
-        return historyOperation;
+        return new ArrayList<>(historyOperation);
     }
 }

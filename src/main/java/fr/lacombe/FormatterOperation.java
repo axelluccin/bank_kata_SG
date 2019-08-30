@@ -1,15 +1,24 @@
 package fr.lacombe;
 
+import java.util.Collections;
+import java.util.List;
+
 public class FormatterOperation {
     private static final String STATEMENT_TITLE = "date || credit || debit || balance";
 
     public StringBuilder getStatement(OperationsHistory operationsHistory) {
         StringBuilder statement = new StringBuilder();
-        for (Operation operation : operationsHistory.getAll()) {
-            statement.insert(0, "\n" + operation.dateTime() + " || "
-                    + operation.formatDeposit() + "|| "
-                    + operation.formatWithdrawal() + "|| "
-                    + operation.balanceOperation());
+        List<Operation> all = operationsHistory.getAll();
+        Collections.reverse(all);
+        for (Operation operation : all) {
+            statement.append("\n")
+                    .append(operation.dateTime())
+                    .append(" || ")
+                    .append(operation.formatDeposit())
+                    .append("|| ")
+                    .append(operation.formatWithdrawal())
+                    .append("|| ")
+                    .append(operation.balanceOperation());
         }
         return statement.insert(0, STATEMENT_TITLE);
     }
