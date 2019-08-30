@@ -8,7 +8,7 @@ public class FormatterOperation {
         Balance balance = new Balance(0);
         for (Operation operation : operationsHistory.getAll()) {
             balance = balance.calculate(operation);
-            statement.insert(0, "\n10/01/2012 || "
+            statement.insert(0, "\n" + operation.dateTime() + " || "
                     + operation.formatDeposit() + "|| "
                     + operation.formatWithdrawal() + "|| "
                     + balance.formatAmount());

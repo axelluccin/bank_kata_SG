@@ -5,7 +5,7 @@ import fr.lacombe.OperationsHistory;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class BankAccpetanceTest {
+public class BankAcceptanceTest {
     @Test
     public void deposit_and_withdrawal_on_account_print_the_statement() {
         // Setup

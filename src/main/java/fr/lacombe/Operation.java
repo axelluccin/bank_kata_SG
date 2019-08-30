@@ -24,4 +24,7 @@ public class Operation {
         return operationType.formatDeposit(amount.money);
     }
 
+    public String dateTime() {
+        return dateTime;
+    }
 }
