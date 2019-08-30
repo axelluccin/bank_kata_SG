@@ -9,7 +9,15 @@ public class Balance {
         this.balance = balance;
     }
 
-    public Balance calculate(Operation operation) {
+    public Balance addDeposite(Amount amount) {
+        return new Balance(this.balance + amount.money);
+    }
+
+    public Balance addWithdrawal(Amount amount) {
+        return new Balance(this.balance - amount.money);
+    }
+
+    public Balance addDeposite(Operation operation) {
         return new Balance(this.balance + operation.amountMoney());
     }
 

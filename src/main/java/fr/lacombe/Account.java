@@ -8,6 +8,7 @@ public class Account {
     private final OperationsHistory operationsHistory;
     private final FormatterOperation formatterOperation;
     private ClockOperation clockOperation;
+    private Balance balance = new Balance(0);
 
     public Account(PrinterStatement printer, OperationsHistory operationsHistory, FormatterOperation formatterOperation, ClockOperation clockOperation) {
         this.printer = printer;
@@ -17,13 +18,13 @@ public class Account {
     }
 
     public void deposit(Amount amount) {
-        String dateTime = clockOperation.dateTime();
-        operationsHistory.add(Deposit, amount, dateTime);
+        balance = balance.addDeposite(amount);
+        operationsHistory.add(Deposit, amount, clockOperation.dateTime(), balance);
     }
 
     public void withdrawal(Amount amount) {
-        String dateTime = clockOperation.dateTime();
-        operationsHistory.add(Withdrawal, amount, dateTime);
+        balance = balance.addWithdrawal(amount);
+        operationsHistory.add(Withdrawal, amount, clockOperation.dateTime(), balance);
     }
 
     public void print() {

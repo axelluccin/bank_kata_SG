@@ -5,13 +5,11 @@ public class FormatterOperation {
 
     public StringBuilder getStatement(OperationsHistory operationsHistory) {
         StringBuilder statement = new StringBuilder();
-        Balance balance = new Balance(0);
         for (Operation operation : operationsHistory.getAll()) {
-            balance = balance.calculate(operation);
             statement.insert(0, "\n" + operation.dateTime() + " || "
                     + operation.formatDeposit() + "|| "
                     + operation.formatWithdrawal() + "|| "
-                    + balance.formatAmount());
+                    + operation.balanceOperation());
         }
         return statement.insert(0, STATEMENT_TITLE);
     }

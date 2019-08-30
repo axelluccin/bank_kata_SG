@@ -5,11 +5,14 @@ public class Operation {
     private final Amount amount;
 
     private final String dateTime;
+    public final Balance balance;
 
-    public Operation(OperationType operationType, Amount amount, String dateTime) {
+
+    public Operation(OperationType operationType, Amount amount, String dateTime, Balance balance) {
         this.operationType = operationType;
         this.amount = amount;
         this.dateTime = dateTime;
+        this.balance = balance;
     }
 
     public double amountMoney() {
@@ -26,5 +29,9 @@ public class Operation {
 
     public String dateTime() {
         return dateTime;
+    }
+
+    public String balanceOperation() {
+        return balance.formatAmount();
     }
 }
