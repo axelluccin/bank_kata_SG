@@ -1,6 +1,5 @@
 import fr.lacombe.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,7 +53,7 @@ public class AccountTest {
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
-                "10/01/2012 || 1000.00 || || 3000.00\n" +
+                "12/01/2012 || 1000.00 || || 3000.00\n" +
                 "10/01/2012 || 2000.00 || || 2000.00");
     }
 
@@ -76,22 +75,19 @@ public class AccountTest {
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
-                "10/01/2012 || || 1000.00 || -1500.00\n" +
+                "12/01/2012 || || 1000.00 || -1500.00\n" +
                 "10/01/2012 || || 500.00 || -500.00");
     }
 
-    @Ignore
     @Test
-    public void toto() {
-        account.withdrawal(new Amount(500.00));
+    public void deposite_1000_and_withdrawal_500_print_two_lines_of_statement() {
         account.deposit(new Amount(1000.00));
+        account.withdrawal(new Amount(500.00));
 
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
                 "12/01/2012 || || 500.00 || 500.00\n" +
-                "10/01/2012 || 1000.00 || || 1000.00\n");
+                "10/01/2012 || 1000.00 || || 1000.00");
     }
-
-
 }
