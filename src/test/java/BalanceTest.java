@@ -1,5 +1,5 @@
-import Balance.Balance;
 import fr.lacombe.Amount;
+import fr.lacombe.Balance;
 import fr.lacombe.Operation;
 import org.junit.Test;
 

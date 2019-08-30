@@ -1,6 +1,4 @@
-package Balance;
-
-import fr.lacombe.Operation;
+package fr.lacombe;
 
 import java.util.Objects;
 
@@ -33,5 +31,9 @@ public class Balance {
         return "Balance{" +
                 "balance=" + balance +
                 '}';
+    }
+
+    String formatAmount() {
+        return String.format("%.2f", balance).replace(',', '.');
     }
 }
