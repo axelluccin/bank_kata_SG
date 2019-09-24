@@ -9,16 +9,12 @@ public class Balance {
         this.balance = balance;
     }
 
-    public Balance addDeposite(Amount amount) {
+    public Balance deposit(Amount amount) {
         return new Balance(this.balance + amount.money);
     }
 
-    public Balance addWithdrawal(Amount amount) {
+    public Balance withdrawal(Amount amount) {
         return new Balance(this.balance - amount.money);
-    }
-
-    public Balance addDeposite(Operation operation) {
-        return new Balance(this.balance + operation.amountMoney());
     }
 
     @Override

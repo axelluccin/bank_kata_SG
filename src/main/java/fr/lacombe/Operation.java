@@ -3,7 +3,6 @@ package fr.lacombe;
 public class Operation {
     private final OperationType operationType;
     private final Amount amount;
-
     private final String dateTime;
     private final Balance balance;
 
@@ -13,10 +12,6 @@ public class Operation {
         this.amount = amount;
         this.dateTime = dateTime;
         this.balance = balance;
-    }
-
-    public double amountMoney() {
-        return operationType.amountMoney(amount.money);
     }
 
     public String formatWithdrawal() {

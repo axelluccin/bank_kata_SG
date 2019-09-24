@@ -3,11 +3,6 @@ package fr.lacombe;
 public enum OperationType {
     Deposit {
         @Override
-        double amountMoney(double amount) {
-            return amount;
-        }
-
-        @Override
         String formatWithdrawal(double amount) {
             return "";
         }
@@ -19,11 +14,6 @@ public enum OperationType {
     },
     Withdrawal {
         @Override
-        double amountMoney(double amount) {
-            return -amount;
-        }
-
-        @Override
         String formatWithdrawal(double amount) {
             return formatAmount(amount) + " ";
         }
@@ -33,9 +23,6 @@ public enum OperationType {
             return "";
         }
     };
-
-
-    abstract double amountMoney(double amount);
 
     abstract String formatWithdrawal(double amount);
 

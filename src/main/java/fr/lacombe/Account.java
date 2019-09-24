@@ -18,16 +18,16 @@ public class Account {
     }
 
     public void deposit(Amount amount) {
-        balance = balance.addDeposite(amount);
+        balance = balance.deposit(amount);
         operationsHistory.add(Deposit, amount, clockOperation.dateTime(), balance);
     }
 
     public void withdrawal(Amount amount) {
-        balance = balance.addWithdrawal(amount);
+        balance = balance.withdrawal(amount);
         operationsHistory.add(Withdrawal, amount, clockOperation.dateTime(), balance);
     }
 
     public void print() {
-        printer.print(this.formatterOperation.getStatement(operationsHistory).toString());
+        printer.print(this.formatterOperation.buildStatement(operationsHistory).toString());
     }
 }
