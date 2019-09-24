@@ -3,6 +3,8 @@ package fr.lacombe;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -27,7 +29,7 @@ public class AccountTest {
 
     @Test
     public void deposit_1000_on_account_print_title_and_one_line() {
-        account.deposit(new Amount(1000.00));
+        account.deposit(new Amount(BigDecimal.valueOf(1000.00)));
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual)
@@ -36,7 +38,7 @@ public class AccountTest {
 
     @Test
     public void deposit_2000_on_account_print_title_and_one_line() {
-        account.deposit(new Amount(2000.00));
+        account.deposit(new Amount(BigDecimal.valueOf(2000.00)));
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
@@ -45,8 +47,8 @@ public class AccountTest {
 
     @Test
     public void deposit_1000_and_2000_on_account_print_title_and_two_line() {
-        account.deposit(new Amount(2000.00));
-        account.deposit(new Amount(1000.00));
+        account.deposit(new Amount(BigDecimal.valueOf(2000.00)));
+        account.deposit(new Amount(BigDecimal.valueOf(1000.00)));
         account.print();
         String actual = printed.getPrinted();
         assertThat(actual).isEqualTo("date || credit || debit || balance\n" +
@@ -56,7 +58,7 @@ public class AccountTest {
 
     @Test
     public void withdrawal_500_on_account_print_title_and_one_line() {
-        account.withdrawal(new Amount(500.00));
+        account.withdrawal(new Amount(BigDecimal.valueOf(500.00)));
 
         account.print();
         String actual = printed.getPrinted();
@@ -66,8 +68,8 @@ public class AccountTest {
 
     @Test
     public void withdrawal_500_and_1000_on_account_print_title_and_two_line() {
-        account.withdrawal(new Amount(500.00));
-        account.withdrawal(new Amount(1000.00));
+        account.withdrawal(new Amount(BigDecimal.valueOf(500.00)));
+        account.withdrawal(new Amount(BigDecimal.valueOf(1000.00)));
 
         account.print();
         String actual = printed.getPrinted();
@@ -77,9 +79,9 @@ public class AccountTest {
     }
 
     @Test
-    public void deposite_1000_and_withdrawal_500_print_two_lines_of_statement() {
-        account.deposit(new Amount(1000.00));
-        account.withdrawal(new Amount(500.00));
+    public void deposit_1000_and_withdrawal_500_print_two_lines_of_statement() {
+        account.deposit(new Amount(BigDecimal.valueOf(1000.00)));
+        account.withdrawal(new Amount(BigDecimal.valueOf(500.00)));
 
         account.print();
         String actual = printed.getPrinted();

@@ -1,5 +1,7 @@
 package fr.lacombe;
 
+import java.math.BigDecimal;
+
 import static fr.lacombe.OperationType.Deposit;
 import static fr.lacombe.OperationType.Withdrawal;
 
@@ -8,7 +10,7 @@ public class Account {
     private final OperationsHistory operationsHistory;
     private final FormatterOperation formatterOperation;
     private ClockOperation clockOperation;
-    private Balance balance = new Balance(0);
+    private Balance balance = new Balance(BigDecimal.ZERO);
 
     public Account(PrinterStatement printer, OperationsHistory operationsHistory, FormatterOperation formatterOperation, ClockOperation clockOperation) {
         this.printer = printer;

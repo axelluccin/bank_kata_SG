@@ -15,11 +15,11 @@ public class Operation {
     }
 
     public String formatWithdrawal() {
-        return operationType.formatWithdrawal(amount.money);
+        return operationType.formatWithdrawal(amount.money.doubleValue());
     }
 
     public String formatDeposit() {
-        return operationType.formatDeposit(amount.money);
+        return operationType.formatDeposit(amount.money.doubleValue());
     }
 
     public String dateTime() {

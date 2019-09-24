@@ -1,20 +1,21 @@
 package fr.lacombe;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Balance {
-    public final double balance;
+    public final BigDecimal balance;
 
-    public Balance(double balance) {
+    public Balance(BigDecimal balance) {
         this.balance = balance;
     }
 
     public Balance deposit(Amount amount) {
-        return new Balance(this.balance + amount.money);
+        return new Balance(this.balance.add(amount.money));
     }
 
     public Balance withdrawal(Amount amount) {
-        return new Balance(this.balance - amount.money);
+        return new Balance(this.balance.subtract(amount.money));
     }
 
     @Override
@@ -22,7 +23,7 @@ public class Balance {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Balance balance1 = (Balance) o;
-        return Double.compare(balance1.balance, balance) == 0;
+        return Objects.equals(balance, balance1.balance);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package fr.lacombe;
 
-public class Amount {
-    public final double money;
+import java.math.BigDecimal;
 
-    public Amount(double money) {
+public class Amount {
+    public final BigDecimal money;
+
+    public Amount(BigDecimal money) {
         this.money = money;
     }
 }
