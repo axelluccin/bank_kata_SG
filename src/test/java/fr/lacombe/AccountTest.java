@@ -28,7 +28,7 @@ public class AccountTest {
     }
 
     @Test
-    public void deposit_1000_on_account_print_title_and_one_line() {
+    public void deposit_1000_on_account_print_title_and_one_line_of_statement() {
         account.deposit(new Amount(BigDecimal.valueOf(1000.00)));
         account.print();
         String actual = printed.getPrinted();
@@ -37,7 +37,7 @@ public class AccountTest {
     }
 
     @Test
-    public void deposit_2000_on_account_print_title_and_one_line() {
+    public void deposit_2000_on_account_print_title_and_one_line_of_statement() {
         account.deposit(new Amount(BigDecimal.valueOf(2000.00)));
         account.print();
         String actual = printed.getPrinted();
@@ -46,7 +46,7 @@ public class AccountTest {
     }
 
     @Test
-    public void deposit_1000_and_2000_on_account_print_title_and_two_line() {
+    public void deposit_1000_and_2000_on_account_print_title_and_two_line_of_statement() {
         account.deposit(new Amount(BigDecimal.valueOf(2000.00)));
         account.deposit(new Amount(BigDecimal.valueOf(1000.00)));
         account.print();
@@ -57,7 +57,7 @@ public class AccountTest {
     }
 
     @Test
-    public void withdrawal_500_on_account_print_title_and_one_line() {
+    public void withdrawal_500_on_account_print_title_and_one_line_of_statement() {
         account.withdrawal(new Amount(BigDecimal.valueOf(500.00)));
 
         account.print();
@@ -67,7 +67,7 @@ public class AccountTest {
     }
 
     @Test
-    public void withdrawal_500_and_1000_on_account_print_title_and_two_line() {
+    public void withdrawal_500_and_1000_on_account_print_title_and_two_line_of_statement() {
         account.withdrawal(new Amount(BigDecimal.valueOf(500.00)));
         account.withdrawal(new Amount(BigDecimal.valueOf(1000.00)));
 
